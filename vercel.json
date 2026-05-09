@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_API_URL",
+      "description": "Backend API URL (e.g., http://your-oracle-ip:8000)",
+      "value": ""
+    }
+  ]
+}
