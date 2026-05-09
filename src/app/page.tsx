@@ -376,18 +376,6 @@ export default function HomePage() {
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
                       {result.video_title || <Skeleton width="80%" />}
                     </Typography>
-                    {result.video_description ? (
-                      <Typography
-                        sx={{ color: "#4b5563", mb: 2, whiteSpace: "pre-wrap" }}
-                      >
-                        {result.video_description}
-                      </Typography>
-                    ) : (
-                      <Box sx={{ mb: 2 }}>
-                        <Skeleton height={20} sx={{ mb: 1 }} />
-                        <Skeleton height={20} width="80%" />
-                      </Box>
-                    )}
                     <Typography
                       sx={{ color: "#4b5563", wordBreak: "break-all" }}
                     >
@@ -504,24 +492,6 @@ export default function HomePage() {
                               },
                             }}
                           />
-                        </Card>
-                      </Grid>
-
-                      <Grid item xs={12}>
-                        <Card sx={{ p: 3, bgcolor: "white" }}>
-                          <Typography
-                            variant="subtitle2"
-                            sx={{ color: "#6b7280", fontWeight: 700, mb: 1 }}
-                          >
-                            Ringkasan Analisis
-                          </Typography>
-                          <Typography sx={{ color: "#4b5563", mb: 1.5 }}>
-                            Status: Selesai
-                          </Typography>
-                          <Typography sx={{ color: "#4b5563" }}>
-                            {progress ||
-                              "Analisis komprehensif selesai. Hasil tersedia di bawah."}
-                          </Typography>
                         </Card>
                       </Grid>
                     </>
