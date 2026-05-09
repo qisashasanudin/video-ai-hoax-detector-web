@@ -36,13 +36,17 @@ function formatPercent(score: number): {
   return { percent, label: "Rendah", color: "success" };
 }
 
-const urlPattern = /^(https?:\/\/[^\s]+)$/;
+const urlPattern = /^(https?:\/\/[^\s)}\]]+)$/;
+
+function cleanUrl(url: string) {
+  return url.replace(/[\s),\]}">]+$/, "");
+}
 
 function AnalysisSkeletonCard() {
   return (
     <Card sx={{ p: 3, bgcolor: "white" }}>
-      <Skeleton variant="text" width="80px" height={20} sx={{ mb: 2 }} />
-      <Skeleton variant="text" width="100px" height={40} sx={{ mb: 2 }} />
+      <Skeleton variant="text" width={80} height={20} sx={{ mb: 2 }} />
+      <Skeleton variant="text" width={100} height={40} sx={{ mb: 2 }} />
       <Skeleton
         variant="rectangular"
         height={30}
@@ -56,7 +60,7 @@ function AnalysisSkeletonCard() {
 function AnalysisContentSkeletonCard() {
   return (
     <Card sx={{ p: 3, bgcolor: "white" }}>
-      <Skeleton variant="text" width="200px" height={28} sx={{ mb: 2 }} />
+      <Skeleton variant="text" width={200} height={28} sx={{ mb: 2 }} />
       <Skeleton variant="text" height={20} sx={{ mb: 1 }} />
       <Skeleton variant="text" height={20} sx={{ mb: 1 }} />
       <Skeleton variant="text" width="80%" height={20} />
@@ -65,21 +69,23 @@ function AnalysisContentSkeletonCard() {
 }
 
 function renderTextWithLinks(text: string) {
-  return text.split(/(https?:\/\/[^\s]+)/g).map((part, index) =>
-    urlPattern.test(part) ? (
-      <a
-        key={index}
-        href={part}
-        target="_blank"
-        rel="noreferrer"
-        style={{ color: "#2563eb", wordBreak: "break-word" }}
-      >
-        {part}
-      </a>
-    ) : (
-      <span key={index}>{part}</span>
-    ),
-  );
+  return text.split(/(https?:\/\/[^\s)}\]]+)/g).map((part, index) => {
+    if (urlPattern.test(part)) {
+      const href = cleanUrl(part);
+      return (
+        <a
+          key={index}
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: "#2563eb", wordBreak: "break-word" }}
+        >
+          {href}
+        </a>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
 }
 
 async function pollJob(
