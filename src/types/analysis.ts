@@ -25,7 +25,7 @@ export type OverallAssessment = {
 
 export type ComprehensiveAnalysis = {
   ai_detection: AIDetectionResult;
-  hoax_analysis: HoaxAnalysis;
+  hoax_analysis?: HoaxAnalysis | null;
   misinformation_analysis: MisinformationAnalysis;
   overall_assessment: OverallAssessment;
 };
