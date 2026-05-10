@@ -1,10 +1,8 @@
 import type { AnalysisResult, JobStatus } from "../types/analysis";
 import { mockGetJob } from "./mockApi";
 
-const urlPattern = /^(https?:\/\/[^\s)\]}]+)$/;
-
 function cleanUrl(url: string) {
-  return url.replace(/[\s)\]\}">]+$/, "");
+  return url.replace(/[\s)\]\}">.,;:]+$/, "");
 }
 
 export function formatPercent(score: number) {
@@ -34,22 +32,21 @@ export function formatPercent(score: number) {
 }
 
 export function renderTextWithLinks(text: string) {
-  const sourcePattern = /(\[?sumber:\s*)(https?:\/\/[^\s)\]}]+)\]?/gi;
-
+  const urlPattern = /(https?:\/\/[^\s)\]}]+)/gi;
   const parts: Array<string | { href: string; label: string }> = [];
   let cursor = 0;
   let match: RegExpExecArray | null;
 
-  while ((match = sourcePattern.exec(text)) !== null) {
+  while ((match = urlPattern.exec(text)) !== null) {
     const start = match.index;
-    const end = sourcePattern.lastIndex;
-    const href = match[2];
+    const end = urlPattern.lastIndex;
+    const href = match[1];
 
     if (start > cursor) {
       parts.push(text.slice(cursor, start));
     }
 
-    parts.push({ href, label: `sumber: ${href}` });
+    parts.push({ href, label: href });
     cursor = end;
   }
 
