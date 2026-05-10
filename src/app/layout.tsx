@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Video Misinfo Platform",
+  title: "AI Hoax Video Platform",
   description: "Decision-support indicators for short-form videos.",
 };
 
