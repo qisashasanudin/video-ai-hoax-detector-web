@@ -130,20 +130,31 @@ export default function DetailSection({
           </Grid>
 
           <Grid item xs={12}>
-            <AnalysisCard
-              title="🛑 Risiko Hoax"
-              label={
-                result.comprehensive_analysis?.hoax_analysis?.risk_level ||
-                "TIDAK ADA"
-              }
-              scoreMeta={hoaxMeta}
-              value={hoaxMeta?.percent || "-"}
-              description={renderTextWithLinks(
-                result.comprehensive_analysis?.hoax_analysis?.explanation ||
-                  "Analisis hoax tidak tersedia.",
-              )}
-              score={result.comprehensive_analysis?.hoax_analysis?.score ?? 0}
-            />
+            {result.comprehensive_analysis?.hoax_analysis ? (
+              <AnalysisCard
+                title="🛑 Risiko Hoax"
+                label={
+                  result.comprehensive_analysis.hoax_analysis.risk_level ||
+                  "TIDAK ADA"
+                }
+                scoreMeta={hoaxMeta}
+                value={hoaxMeta?.percent || "-"}
+                description={renderTextWithLinks(
+                  result.comprehensive_analysis.hoax_analysis.explanation ||
+                    "Analisis hoax tidak tersedia.",
+                )}
+                score={result.comprehensive_analysis.hoax_analysis.score ?? 0}
+              />
+            ) : (
+              <Card sx={{ p: 3, bgcolor: "#fffbe6", border: "1px solid #fef08a" }}>
+                <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: "#854d0e" }}>
+                  🛑 Risiko Hoax (Data Tidak Tersedia)
+                </Typography>
+                <Typography sx={{ color: "#a16207" }}>
+                  {result.analysis_error || "Analisis hoax tidak tersedia karena tidak ada bukti pencarian web yang ditemukan."}
+                </Typography>
+              </Card>
+            )}
           </Grid>
 
           <Grid item xs={12}>
@@ -175,8 +186,8 @@ export default function DetailSection({
                 📋 Rekomendasi dan Temuan Utama
               </Typography>
               <Typography sx={{ color: "#4b5563", mb: 3, lineHeight: 1.6 }}>
-                {result.comprehensive_analysis?.overall_assessment
-                  ?.recommendation || "Rekomendasi tidak tersedia."}
+                {renderTextWithLinks(result.comprehensive_analysis?.overall_assessment
+                  ?.recommendation || "Rekomendasi tidak tersedia.")}
               </Typography>
               {result.comprehensive_analysis?.overall_assessment
                 ?.key_findings && (
@@ -203,7 +214,7 @@ export default function DetailSection({
                             <Typography
                               sx={{ color: "#4b5563", fontSize: "0.95rem" }}
                             >
-                              • {finding}
+                              • {renderTextWithLinks(finding)}
                             </Typography>
                           </Paper>
                         </Grid>

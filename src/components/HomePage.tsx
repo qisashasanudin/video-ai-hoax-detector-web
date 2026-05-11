@@ -57,16 +57,17 @@ export default function HomePage() {
     setAnalysisPhase("extracting");
 
     if (!url.trim()) {
-      setError("Masukkan URL YouTube terlebih dahulu.");
+      setError("Masukkan URL YouTube atau TikTok terlebih dahulu.");
       setIsRunning(false);
       return;
     }
 
     try {
-      setProgress("Mengunduh video dari YouTube...");
+      setProgress("Mengunduh video...");
+      const source = url.includes("tiktok.com") ? "tiktok" : "youtube";
       const extractRes = await mockExtract({
         url: url.trim(),
-        source: "youtube",
+        source: source,
       });
       const jobId = extractRes.job_id;
 

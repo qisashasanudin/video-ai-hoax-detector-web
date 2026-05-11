@@ -41,11 +41,30 @@ export default function OverviewSection({
             </Typography>
             {result.video_thumbnail_url ? (
               <Box
-                component="img"
-                src={result.video_thumbnail_url}
-                alt={result.video_title ?? "Thumbnail video"}
-                sx={{ width: "100%", borderRadius: 3, mb: 2 }}
-              />
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  paddingTop: "56.25%", // 16:9 aspect ratio
+                  bgcolor: "#000",
+                  borderRadius: 3,
+                  mb: 2,
+                  overflow: "hidden"
+                }}
+              >
+                <Box
+                  component="img"
+                  src={result.video_thumbnail_url}
+                  alt={result.video_title ?? "Thumbnail video"}
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
             ) : (
               <Paper
                 elevation={0}

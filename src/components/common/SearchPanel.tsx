@@ -32,7 +32,7 @@ export default function SearchPanel({
     >
       <TextField
         fullWidth
-        placeholder="Masukkan URL video YouTube..."
+        placeholder="Masukkan URL video YouTube atau TikTok..."
         value={url}
         disabled={isRunning}
         onChange={(event) => setUrl(event.target.value)}
