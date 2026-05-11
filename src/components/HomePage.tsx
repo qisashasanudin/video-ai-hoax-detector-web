@@ -57,14 +57,14 @@ export default function HomePage() {
     setAnalysisPhase("extracting");
 
     if (!url.trim()) {
-      setError("Masukkan URL YouTube atau TikTok terlebih dahulu.");
+      setError("Masukkan URL YouTube, TikTok, atau Instagram terlebih dahulu.");
       setIsRunning(false);
       return;
     }
 
     try {
       setProgress("Mengunduh video...");
-      const source = url.includes("tiktok.com") ? "tiktok" : "youtube";
+      const source = url.includes("tiktok.com") ? "tiktok" : url.includes("instagram.com") ? "instagram" : "youtube";
       const extractRes = await mockExtract({
         url: url.trim(),
         source: source,

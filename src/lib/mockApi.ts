@@ -8,7 +8,7 @@ import type {
 
 type AnalyzeRequest = {
   url: string;
-  source: "youtube" | "tiktok";
+  source: "youtube" | "tiktok" | "instagram";
 };
 
 type ExtractResponse = {
