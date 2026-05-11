@@ -2,11 +2,11 @@
 
 ## System summary
 
-The web frontend provides a user interface for submitting YouTube video URLs and visualizing backend analysis results for AI detection and misinformation risk.
+The web frontend provides a user interface for submitting YouTube, TikTok, and Instagram video URLs and visualizing backend analysis results for AI detection and misinformation risk.
 
 ## Goals
 
-- Allow users to enter a YouTube URL and submit it for analysis.
+- Allow users to enter a YouTube, TikTok, or Instagram URL and submit it for analysis.
 - Poll the backend until analysis completes.
 - Display AI detection, hoax risk, and misinformation risk scores.
 - Present extracted claims and explanations in a clear UI.
@@ -33,7 +33,7 @@ The web frontend provides a user interface for submitting YouTube video URLs and
 
 ### Data flow
 
-1. User enters a YouTube URL and submits the form.
+1. User enters a YouTube, TikTok, or Instagram URL and submits the form.
 2. Frontend calls the backend `POST /analyze` endpoint.
 3. Backend returns a `job_id`.
 4. Frontend polls `GET /jobs/{job_id}` until `status` is `succeeded` or `failed`.
@@ -55,6 +55,8 @@ The frontend expects the backend to provide the following fields:
 - `overall_assessment.recommendation`
 - `overall_assessment.key_findings`
 - `claims` array
+
+Note: The frontend is resilient to missing data. If the backend fails to find search evidence and omits `hoax_analysis`, the frontend will display a fallback warning instead of a numerical score.
 
 ## Environment
 

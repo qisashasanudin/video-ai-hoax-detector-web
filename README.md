@@ -1,6 +1,6 @@
 # AI Hoax Video Platform Web UI
 
-Next.js frontend for the Video AI Hoax Detector. This app collects a YouTube URL, submits it to the backend, and displays AI, hoax, and misinformation analysis results.
+Next.js frontend for the Video AI Hoax Detector. This app collects a YouTube, TikTok, or Instagram URL, submits it to the backend, and displays AI, hoax, and misinformation analysis results.
 
 ## Setup
 
@@ -43,7 +43,7 @@ The frontend polls `GET /jobs/{job_id}` after submitting `POST /analyze` and dis
 
 ## Features
 
-- Submit a YouTube video URL.
+- Submit a YouTube, TikTok, or Instagram video URL.
 - Poll backend job status until analysis completes.
 - Render AI detection, hoax risk, and misinformation risk.
 - Display extracted claims with explanations.
